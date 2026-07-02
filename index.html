@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرام وهو</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+  :root{
+    --platinum:#e7e7ea;
+    --silver:#b9bac0;
+    --steel:#7d7f88;
+    --graphite:#232428;
+    --ink:#141417;
+    --blush:#cfa8ab;
+    --blush-soft:#e7cfd0;
+    --line: rgba(255,255,255,0.14);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.06), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(255,255,255,0.05), transparent 45%),
+      linear-gradient(160deg, var(--ink) 0%, var(--graphite) 55%, #1a1a1d 100%);
+    background-attachment: fixed;
+    color: var(--platinum);
+    font-family: 'Tajawal', sans-serif;
+    min-height: 100vh;
+    padding: 60px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M60 100C60 100 20 74 20 44C20 28 32 18 46 18C53 18 58.5 22 60 28C61.5 22 67 18 74 18C88 18 100 28 100 44C100 74 60 100 60 100Z' fill='none' stroke='%23e7e7ea' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    z-index: 0;
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+  }
+
+  .wrap{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    text-align:center;
+    margin-bottom: 70px;
+  }
+
+  .eyebrow{
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--blush);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+
+  .hero h1{
+    font-family:'Amiri', serif;
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--silver) 55%, var(--steel) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    margin-bottom: 22px;
+    text-shadow: 0 0 60px rgba(255,255,255,0.18);
+  }
+
+  .hero .amp{
+    display:inline-block;
+    margin: 0 14px;
+    color: var(--blush);
+    font-family:'Amiri', serif;
+    -webkit-text-fill-color: var(--blush);
+  }
+
+  .hero p{
+    color: var(--silver);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  .hero .quote{
+    font-family:'Amiri', serif;
+    font-style: italic;
+    color: var(--blush-soft);
+    font-size: 19px;
+    margin-top: 14px;
+  }
+
+  .frame{
+    position: relative;
+    width: min(340px, 80vw);
+    margin: 40px auto 0;
+    padding: 10px;
+    background: linear-gradient(155deg, #fdfdfe, var(--silver) 45%, #8c8e96 100%);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 50px -10px rgba(207,168,171,0.35), 0 0 0 1px rgba(255,255,255,0.12);
+  }
+
+  .frame img{
+    width: 100%;
+    display:block;
+    border-radius: 12px;
+  }
+
+  /* ---------- Divider / signature ---------- */
+  .rings{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 0;
+    margin: 60px 0;
+  }
+  .rings .line{
+    flex:1;
+    height:1px;
+    background: linear-gradient(90deg, transparent, var(--line));
+  }
+  .rings .line.left{ background: linear-gradient(270deg, transparent, var(--line)); }
+  .rings svg{ margin: 0 18px; filter: drop-shadow(0 0 12px rgba(207,168,171,0.45)); }
+
+  /* ---------- Profiles ---------- */
+  .profiles{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+
+  @media (max-width: 720px){
+    .profiles{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(165deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 20px;
+    padding: 34px 30px;
+    position: relative;
+    overflow:hidden;
+    box-shadow: 0 25px 50px -25px rgba(0,0,0,0.9);
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 30%);
+    pointer-events:none;
+  }
+
+  .card .name{
+    font-family:'Amiri', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .card .role{
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blush-soft);
+    margin-bottom: 26px;
+  }
+
+  .section-title{
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin: 22px 0 12px;
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background: var(--line);
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 8px;
+  }
+
+  .tag{
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    color: var(--platinum);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+
+  .tag.no{
+    background: rgba(207,168,171,0.08);
+    border-color: rgba(207,168,171,0.35);
+    color: var(--blush-soft);
+    text-decoration: line-through;
+    text-decoration-color: rgba(207,168,171,0.6);
+  }
+
+  .note{
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: var(--steel);
+    line-height: 1.8;
+    border-right: 2px solid var(--blush);
+    padding-right: 14px;
+  }
+
+  /* ---------- Footer ---------- */
+  .love-mark{
+    display:flex;
+    justify-content:center;
+    margin-top: 70px;
+    filter: drop-shadow(0 0 22px rgba(207,168,171,0.5));
+  }
+
+  footer{
+    text-align:center;
+    margin-top: 26px;
+    color: var(--steel);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .monogram{
+    font-family:'Amiri', serif;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .monogram .heart{
+    font-size: 30px;
+    color: var(--blush);
+    animation: pulse 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(207,168,171,0.6));
+  }
+
+  @keyframes pulse{
+    0%, 100%{ transform: scale(1); }
+    50%{ transform: scale(1.18); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .monogram .heart{ animation: none; }
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="eyebrow">♥ قصة حب ♥</div>
+      <h1>مرام <span class="amp">&amp;</span> عادل</h1>
+      <p>حكاية اثنين اجتمعوا على المحبة.</p>
+      <p class="quote">"قلبان، نبضة واحدة"</p>
+
+      <div class="frame">
+        <img src="https://upload.mthaiand123.workers.dev/dcFZkncQ1q.png" alt="صورة">
+      </div>
+    </div>
+
+    <div class="rings">
+      <span class="line left"></span>
+      <svg width="60" height="30" viewBox="0 0 46 24" fill="none">
+        <circle cx="15" cy="12" r="10" stroke="#cfa8ab" stroke-width="2.2"/>
+        <circle cx="31" cy="12" r="10" stroke="#e7e7ea" stroke-width="2.2"/>
+      </svg>
+      <span class="line"></span>
+    </div>
+
+    <div class="profiles">
+
+      <!-- Maram -->
+      <div class="card">
+        <div class="name">مرام</div>
+        <div class="role">هيّ</div>
+
+        <div class="section-title">أفلام</div>
+        <div class="tags">
+          <span class="tag">أفلام ديزني</span>
+          <span class="tag">الأميرات</span>
+          <span class="tag">رومانسي</span>
+          <span class="tag">أكشن</span>
+          <span class="tag no">رعب</span>
+        </div>
+
+        <div class="section-title">أكل</div>
+        <div class="tags">
+          <span class="tag">زنجر</span>
+          <span class="tag">ريزو</span>
+          <span class="tag">بيتزا</span>
+          <span class="tag">ڤلر</span>
+          <span class="tag">دولمة (السلك بذاته)</span>
+          <span class="tag">تمن أحمر</span>
+          <span class="tag">دجاج</span>
+          <span class="tag">تشريب أصفر</span>
+          <span class="tag">تمن أبيض</span>
+          <span class="tag">برياني</span>
+          <span class="tag no">تمن أصفر</span>
+        </div>
+
+        <div class="note">تخاف من أفلام الرعب، فهي بعيدة عنها تمامًا.</div>
+      </div>
+
+      <!-- Him -->
+      <div class="card">
+        <div class="name">عادل</div>
+        <div class="role">هوّ</div>
+
+        <div class="section-title">أفلام</div>
+        <div class="tags">
+          <span class="tag">رعب</span>
+          <span class="tag">أكشن</span>
+          <span class="tag">رومانسي</span>
+        </div>
+
+        <div class="section-title">أشياء يحبها</div>
+        <div class="tags">
+          <span class="tag">شوكولاتة كندر</span>
+          <span class="tag">الأشياء العسكرية</span>
+        </div>
+
+        <div class="section-title">أكل</div>
+        <div class="tags">
+          <span class="tag">كباب</span>
+          <span class="tag">دولمة</span>
+          <span class="tag">باميه</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="love-mark">
+      <svg width="52" height="46" viewBox="0 0 52 46" fill="none">
+        <path d="M26 44C26 44 2 29.5 2 14.8C2 6.6 8.6 1 16 1C20.6 1 24.2 3.4 26 7C27.8 3.4 31.4 1 36 1C43.4 1 50 6.6 50 14.8C50 29.5 26 44 26 44Z"
+          fill="none" stroke="url(#g)" stroke-width="2.4"/>
+        <defs>
+          <linearGradient id="g" x1="2" y1="1" x2="50" y2="44" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#cfa8ab"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <footer>
+      <span class="monogram">A<span class="heart">♥</span>M</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
