@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مرام وهو</title>
+<title>مرام &amp; عادل</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 
   :root{
     --platinum:#e7e7ea;
@@ -15,10 +15,14 @@
     --ink:#141417;
     --blush:#cfa8ab;
     --blush-soft:#e7cfd0;
+    --blush-deep:#b08084;
     --line: rgba(255,255,255,0.14);
+    --glow: rgba(207,168,171,0.5);
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{ scroll-behavior: smooth; }
 
   body{
     background:
@@ -32,6 +36,30 @@
     padding: 60px 20px;
     position: relative;
     overflow-x: hidden;
+  }
+
+  /* Floating particles */
+  .particles{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle{
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--blush);
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatUp 8s ease-in-out infinite;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(100vh) scale(0); opacity: 0; }
+    10%{ opacity: 0.6; }
+    90%{ opacity: 0.6; }
+    100%{ transform: translateY(-10vh) scale(1); opacity: 0; }
   }
 
   body::before{
@@ -48,9 +76,6 @@
   .wrap{
     position: relative;
     z-index: 1;
-  }
-
-  .wrap{
     max-width: 980px;
     margin: 0 auto;
   }
@@ -59,6 +84,7 @@
   .hero{
     text-align:center;
     margin-bottom: 70px;
+    perspective: 1000px;
   }
 
   .eyebrow{
@@ -68,6 +94,8 @@
     text-transform: uppercase;
     margin-bottom: 18px;
     font-weight: 700;
+    opacity: 0;
+    animation: fadeInDown 1s ease forwards 0.2s;
   }
 
   .hero h1{
@@ -82,6 +110,9 @@
     line-height: 1.2;
     margin-bottom: 22px;
     text-shadow: 0 0 60px rgba(255,255,255,0.18);
+    opacity: 0;
+    animation: fadeInUp 1.2s ease forwards 0.4s;
+    transform-style: preserve-3d;
   }
 
   .hero .amp{
@@ -90,6 +121,8 @@
     color: var(--blush);
     font-family:'Amiri', serif;
     -webkit-text-fill-color: var(--blush);
+    animation: heartbeat 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px var(--glow));
   }
 
   .hero p{
@@ -98,6 +131,8 @@
     max-width: 480px;
     margin: 0 auto;
     line-height: 1.9;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 0.6s;
   }
 
   .hero .quote{
@@ -106,6 +141,8 @@
     color: var(--blush-soft);
     font-size: 19px;
     margin-top: 14px;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 0.8s;
   }
 
   .frame{
@@ -115,13 +152,90 @@
     padding: 10px;
     background: linear-gradient(155deg, #fdfdfe, var(--silver) 45%, #8c8e96 100%);
     border-radius: 18px;
-    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 50px -10px rgba(207,168,171,0.35), 0 0 0 1px rgba(255,255,255,0.12);
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 50px -10px var(--glow), 0 0 0 1px rgba(255,255,255,0.12);
+    opacity: 0;
+    animation: scaleIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1s;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+  }
+
+  .frame:hover{
+    transform: translateY(-8px) rotateX(5deg) rotateY(5deg) scale(1.02);
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.9), 0 0 80px -10px var(--glow), 0 0 0 1px rgba(255,255,255,0.2);
   }
 
   .frame img{
     width: 100%;
     display:block;
     border-radius: 12px;
+    transition: transform 0.6s ease;
+  }
+
+  .frame:hover img{
+    transform: scale(1.05);
+  }
+
+  .stats{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 22px;
+    margin-top: 34px;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 1.2s;
+  }
+
+  .stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 4px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .stat:hover{
+    transform: translateY(-6px) scale(1.1);
+  }
+
+  .stat-label{
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--steel);
+    transition: color 0.3s ease;
+  }
+
+  .stat:hover .stat-label{
+    color: var(--blush);
+  }
+
+  .stat-value{
+    font-family:'Amiri', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--platinum);
+    transition: all 0.3s ease;
+  }
+
+  .stat:hover .stat-value{
+    text-shadow: 0 0 20px var(--glow);
+  }
+
+  .stat:nth-child(3) .stat-value{
+    color: var(--blush);
+    animation: heartbeat 1.8s ease-in-out infinite;
+  }
+
+  .stat-sep{
+    width: 1px;
+    height: 30px;
+    background: var(--line);
+    animation: pulseLine 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseLine{
+    0%, 100%{ opacity: 0.3; }
+    50%{ opacity: 1; }
   }
 
   /* ---------- Divider / signature ---------- */
@@ -131,6 +245,8 @@
     justify-content:center;
     gap: 0;
     margin: 60px 0;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards 1.4s;
   }
   .rings .line{
     flex:1;
@@ -138,7 +254,12 @@
     background: linear-gradient(90deg, transparent, var(--line));
   }
   .rings .line.left{ background: linear-gradient(270deg, transparent, var(--line)); }
-  .rings svg{ margin: 0 18px; filter: drop-shadow(0 0 12px rgba(207,168,171,0.45)); }
+  .rings svg{ margin: 0 18px; filter: drop-shadow(0 0 12px rgba(207,168,171,0.45)); animation: rotateRing 6s linear infinite; }
+
+  @keyframes rotateRing{
+    0%{ transform: rotate(0deg); }
+    100%{ transform: rotate(360deg); }
+  }
 
   /* ---------- Profiles ---------- */
   .profiles{
@@ -159,7 +280,38 @@
     position: relative;
     overflow:hidden;
     box-shadow: 0 25px 50px -25px rgba(0,0,0,0.9);
+    opacity: 0;
+    transform: translateY(40px) rotateX(10deg);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
   }
+
+  .card.visible{
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+
+  .card:hover{
+    transform: translateY(-12px) rotateX(2deg) scale(1.02);
+    box-shadow: 0 35px 70px -20px rgba(0,0,0,0.95), 0 0 40px -10px var(--glow);
+    border-color: rgba(207,168,171,0.4);
+  }
+
+  .card .corner{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--silver);
+    opacity: 0.65;
+    transition: all 0.4s ease;
+  }
+  .card:hover .corner{
+    border-color: var(--blush);
+    opacity: 1;
+    box-shadow: 0 0 10px var(--glow);
+  }
+  .card .corner.tl{ top: 12px; right: 12px; border-left:none; border-bottom:none; }
+  .card .corner.br{ bottom: 12px; left: 12px; border-right:none; border-top:none; }
 
   .card::before{
     content:"";
@@ -169,6 +321,29 @@
     pointer-events:none;
   }
 
+  /* Shimmer effect on cards */
+  .card::after{
+    content:"";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255,255,255,0.03) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+  }
+
+  .card:hover::after{
+    transform: translateX(100%) rotate(45deg);
+  }
+
   .card .name{
     font-family:'Amiri', serif;
     font-size: 34px;
@@ -176,6 +351,12 @@
     color: #fff;
     margin-bottom: 4px;
     letter-spacing: 0.5px;
+    transition: all 0.4s ease;
+  }
+
+  .card:hover .name{
+    text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    transform: translateX(5px);
   }
 
   .card .role{
@@ -184,6 +365,12 @@
     text-transform: uppercase;
     color: var(--blush-soft);
     margin-bottom: 26px;
+    transition: all 0.4s ease;
+  }
+
+  .card:hover .role{
+    color: var(--blush);
+    letter-spacing: 4px;
   }
 
   .section-title{
@@ -195,6 +382,20 @@
     display:flex;
     align-items:center;
     gap: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover .section-title{
+    color: var(--platinum);
+  }
+
+  .section-title .icon{
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card:hover .section-title .icon{
+    transform: scale(1.2) rotate(10deg);
   }
 
   .section-title::after{
@@ -202,6 +403,11 @@
     flex:1;
     height:1px;
     background: var(--line);
+    transition: background 0.3s ease;
+  }
+
+  .card:hover .section-title::after{
+    background: linear-gradient(90deg, var(--line), var(--blush), var(--line));
   }
 
   .tags{
@@ -218,6 +424,31 @@
     border-radius: 999px;
     font-size: 13.5px;
     font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tag::before{
+    content:"";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .tag:hover::before{
+    transform: translateX(100%);
+  }
+
+  .tag:hover{
+    background: rgba(255,255,255,0.15);
+    border-color: var(--blush);
+    color: #fff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px -5px rgba(207,168,171,0.3);
   }
 
   .tag.no{
@@ -226,6 +457,13 @@
     color: var(--blush-soft);
     text-decoration: line-through;
     text-decoration-color: rgba(207,168,171,0.6);
+    transition: all 0.4s ease;
+  }
+
+  .tag.no:hover{
+    background: rgba(207,168,171,0.15);
+    border-color: rgba(207,168,171,0.6);
+    transform: translateY(-3px) scale(1.05);
   }
 
   .note{
@@ -235,6 +473,13 @@
     line-height: 1.8;
     border-right: 2px solid var(--blush);
     padding-right: 14px;
+    transition: all 0.4s ease;
+  }
+
+  .card:hover .note{
+    border-right-width: 4px;
+    color: var(--silver);
+    padding-right: 18px;
   }
 
   /* ---------- Footer ---------- */
@@ -243,6 +488,12 @@
     justify-content:center;
     margin-top: 70px;
     filter: drop-shadow(0 0 22px rgba(207,168,171,0.5));
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 2s;
+  }
+
+  .love-mark svg{
+    animation: heartbeat 2s ease-in-out infinite;
   }
 
   footer{
@@ -251,6 +502,8 @@
     color: var(--steel);
     font-size: 13px;
     letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 2.2s;
   }
 
   .monogram{
@@ -262,27 +515,85 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: all 0.4s ease;
+  }
+
+  .monogram:hover{
+    text-shadow: 0 0 40px rgba(255,255,255,0.3);
+    transform: scale(1.05);
   }
 
   .monogram .heart{
     font-size: 30px;
     color: var(--blush);
-    animation: pulse 1.8s ease-in-out infinite;
+    animation: heartbeat 1.8s ease-in-out infinite;
     filter: drop-shadow(0 0 10px rgba(207,168,171,0.6));
+    display: inline-block;
   }
 
-  @keyframes pulse{
+  /* ========== KEYFRAMES ========== */
+  @keyframes fadeIn{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+  }
+
+  @keyframes fadeInUp{
+    from{ opacity: 0; transform: translateY(30px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown{
+    from{ opacity: 0; transform: translateY(-20px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn{
+    from{ opacity: 0; transform: scale(0.8) rotateX(15deg); }
+    to{ opacity: 1; transform: scale(1) rotateX(0deg); }
+  }
+
+  @keyframes heartbeat{
     0%, 100%{ transform: scale(1); }
-    50%{ transform: scale(1.18); }
+    14%{ transform: scale(1.15); }
+    28%{ transform: scale(1); }
+    42%{ transform: scale(1.15); }
+    70%{ transform: scale(1); }
+  }
+
+  @keyframes shimmer{
+    0%{ background-position: -200% 0; }
+    100%{ background-position: 200% 0; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .monogram .heart{ animation: none; }
+    *, *::before, *::after{
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
+  /* Scrollbar styling */
+  ::-webkit-scrollbar{
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track{
+    background: var(--ink);
+  }
+  ::-webkit-scrollbar-thumb{
+    background: var(--steel);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background: var(--blush);
+  }
 </style>
+<base target="_blank">
 </head>
 <body>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
 
   <div class="wrap">
 
@@ -294,6 +605,23 @@
 
       <div class="frame">
         <img src="https://upload.mthaiand123.workers.dev/dcFZkncQ1q.png" alt="صورة">
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">هيّ</span>
+          <span class="stat-value">مرام</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-label">معًا</span>
+          <span class="stat-value">♥</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-label">هوّ</span>
+          <span class="stat-value">عادل</span>
+        </div>
       </div>
     </div>
 
@@ -309,11 +637,13 @@
     <div class="profiles">
 
       <!-- Maram -->
-      <div class="card">
+      <div class="card" data-animate>
+        <span class="corner tl"></span>
+        <span class="corner br"></span>
         <div class="name">مرام</div>
         <div class="role">هيّ</div>
 
-        <div class="section-title">أفلام</div>
+        <div class="section-title"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#cfa8ab" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16M2 9h5M2 15h5M17 9h5M17 15h5"/></svg> أفلام</div>
         <div class="tags">
           <span class="tag">أفلام ديزني</span>
           <span class="tag">الأميرات</span>
@@ -322,7 +652,7 @@
           <span class="tag no">رعب</span>
         </div>
 
-        <div class="section-title">أكل</div>
+        <div class="section-title"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#cfa8ab" stroke-width="1.6"><path d="M6 2v8a2 2 0 0 0 4 0V2M8 10v12M18 2c-2 2-2 6 0 8v10"/></svg> أكل</div>
         <div class="tags">
           <span class="tag">زنجر</span>
           <span class="tag">ريزو</span>
@@ -341,24 +671,26 @@
       </div>
 
       <!-- Him -->
-      <div class="card">
+      <div class="card" data-animate>
+        <span class="corner tl"></span>
+        <span class="corner br"></span>
         <div class="name">عادل</div>
         <div class="role">هوّ</div>
 
-        <div class="section-title">أفلام</div>
+        <div class="section-title"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#cfa8ab" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16M2 9h5M2 15h5M17 9h5M17 15h5"/></svg> أفلام</div>
         <div class="tags">
           <span class="tag">رعب</span>
           <span class="tag">أكشن</span>
           <span class="tag">رومانسي</span>
         </div>
 
-        <div class="section-title">أشياء يحبها</div>
+        <div class="section-title"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#cfa8ab" stroke-width="1.6"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/><circle cx="19" cy="17" r="3"/></svg> أشياء يحبها</div>
         <div class="tags">
           <span class="tag">شوكولاتة كندر</span>
           <span class="tag">الأشياء العسكرية</span>
         </div>
 
-        <div class="section-title">أكل</div>
+        <div class="section-title"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#cfa8ab" stroke-width="1.6"><path d="M6 2v8a2 2 0 0 0 4 0V2M8 10v12M18 2c-2 2-2 6 0 8v10"/></svg> أكل</div>
         <div class="tags">
           <span class="tag">كباب</span>
           <span class="tag">دولمة</span>
@@ -386,6 +718,68 @@
     </footer>
 
   </div>
+
+  <script>
+    // Create floating particles
+    const particlesContainer = document.getElementById('particles');
+    for(let i = 0; i < 30; i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 8 + 's';
+      p.style.animationDuration = (6 + Math.random() * 6) + 's';
+      p.style.width = (2 + Math.random() * 4) + 'px';
+      p.style.height = p.style.width;
+      particlesContainer.appendChild(p);
+    }
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    // 3D tilt effect on frame
+    const frame = document.querySelector('.frame');
+    if(frame){
+      frame.addEventListener('mousemove', (e) => {
+        const rect = frame.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        frame.style.transform = `translateY(-8px) rotateX(${-y * 15}deg) rotateY(${x * 15}deg) scale(1.02)`;
+      });
+      frame.addEventListener('mouseleave', () => {
+        frame.style.transform = '';
+      });
+    }
+
+    // 3D tilt on cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `translateY(-12px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // Parallax on scroll
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      document.querySelectorAll('.particle').forEach((p, i) => {
+        const speed = 0.2 + (i % 5) * 0.1;
+        p.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+  </script>
 
 </body>
 </html>
